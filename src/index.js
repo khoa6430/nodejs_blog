@@ -6,13 +6,16 @@ const app = express()
 const port = 3000
 
 app.use(morgan('combined'))
-app.engine('handlebars', handlebars.engine());
-app.set('view engine', 'handlebars');
-app.set('views', './views');
+app.engine('.hbs', handlebars.engine({extname: '.hbs'}));
+app.set('view engine', '.hbs');
+app.set('views', './src/resources/views')
 
 
 app.get('/', (req, res) => {
   res.render('home')
+})
+app.get('/news', (req, res) => {
+  res.render('news')
 })
 
 app.listen(port, () => {
