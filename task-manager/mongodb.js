@@ -95,16 +95,16 @@ async function run() {
     //   .catch((error) => {
     //     console.log(error);
     //   });
-    const deleteUser = await users
-      .deleteMany({
-        age: 27,
-      })
-      .then((result) => {
-        console.log(result);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    // const deleteUser = await users
+    //   .deleteMany({
+    //     age: 27,
+    //   })
+    //   .then((result) => {
+    //     console.log(result);
+    //   })
+    //   .catch((error) => {
+    //     console.log(error);
+    //   });
   } finally {
     // Close the connection to the MongoDB cluster
     await client.close();
