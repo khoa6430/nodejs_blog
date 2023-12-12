@@ -1,5 +1,5 @@
-const Task = require("./models/task");
-
+const express = require("express");
+const Task = require("../models/task");
 const router = new express.Router();
 router.get("/tasks", async (req, res) => {
   try {
@@ -76,3 +76,5 @@ router.delete("/tasks/:id", async (req, res) => {
     res.status(500).send();
   }
 });
+
+module.exports = router;
