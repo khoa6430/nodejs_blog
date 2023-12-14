@@ -2,9 +2,12 @@ const express = require("express");
 require("./db/mongoose");
 const userRouter = require("./routers/user");
 const taskRouter = require("./routers/task");
+const jwt = require("jsonwebtoken");
 
 const app = express();
 const port = process.env.PORT || 3000;
+//without middleware : new request -> run route handler
+//with middleware : new request -> do something -> run route handler
 
 app.use(express.json());
 
@@ -15,17 +18,17 @@ app.listen(port, () => {
   console.log("Server is up on port " + port);
 });
 
-const bcrypt = require("bcryptjs");
+const Task = require("./models/task");
+const User = require("./models/user");
 
-const myFunction = async () => {
-  const password = "Red12345!";
-  const hashedPassword = await bcrypt.hash(password, 8);
-
-  console.log(password);
-  console.log(hashedPassword);
-
-  const isMatch = await bcrypt.compare("red12345!", hashedPassword);
-  console.log(isMatch);
+const main = async () => {
+  const task = await Task.findById("6579cf17e0cad5ed5fb723ce");
+  // await task.populate([{ path: "owner" }]);
+  // console.log(task.owner);
+  // user.populate
+  const user = await User.findById("6579cf09e0cad5ed5fb723c3");
+  // await user.populate("tasks");
+  // console.log(user.tasks);
 };
 
-myFunction();
+main();
