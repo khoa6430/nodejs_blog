@@ -6,8 +6,49 @@ const jwt = require("jsonwebtoken");
 
 const app = express();
 const port = process.env.PORT || 3000;
-//without middleware : new request -> run route handler
-//with middleware : new request -> do something -> run route handler
+
+const multer = require("multer");
+
+// const upload = multer({
+//   dest: "images",
+//   fileFilter(req, file, cb) {
+//     if (!file.originalname.match(/\.(doc|docx)$/)) {
+//       return cb(new Error("Please upload a Word document"));
+//     }
+
+//     cb(undefined, true);
+//   },
+// });
+
+// app.post("/upload", upload.single("upload"), (req, res) => {
+//   res.send();
+// });
+
+const upload = multer({
+  dest: "images",
+  limits: {
+    fileSize: 1000000,
+  },
+  fileFilter(req, file, cb) {
+    console.log("file:", file.originalname);
+    if (!file.originalname.match(/\.(doc|docx)$/)) {
+      return cb(new Error("Please upload a Word document"));
+    }
+
+    cb(undefined, true);
+  },
+});
+
+app.post(
+  "/upload",
+  upload.single("upload"),
+  (req, res) => {
+    res.send();
+  },
+  (error, req, res, next) => {
+    res.status(400).send({ error: error.message });
+  }
+);
 
 app.use(express.json());
 
@@ -17,18 +58,3 @@ app.use(taskRouter);
 app.listen(port, () => {
   console.log("Server is up on port " + port);
 });
-
-const Task = require("./models/task");
-const User = require("./models/user");
-
-const main = async () => {
-  const task = await Task.findById("6579cf17e0cad5ed5fb723ce");
-  // await task.populate([{ path: "owner" }]);
-  // console.log(task.owner);
-  // user.populate
-  const user = await User.findById("6579cf09e0cad5ed5fb723c3");
-  // await user.populate("tasks");
-  // console.log(user.tasks);
-};
-
-main();
