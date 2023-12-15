@@ -1,11 +1,12 @@
 const jwt = require("jsonwebtoken");
 const User = require("../models/user");
+const { JWT_SECRET } = require("../../config/endpoints");
 //without middleware : new request -> run route handler
 //with middleware : new request -> do something -> run route handler
 const auth = async (req, res, next) => {
   try {
     const token = req.header("Authorization").replace("Bearer ", "");
-    const decoded = jwt.verify(token, "thisismynewlesson");
+    const decoded = jwt.verify(token, JWT_SECRET);
     const user = await User.findOne({
       _id: decoded._id,
       "tokens.token": token,

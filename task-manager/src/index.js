@@ -3,9 +3,10 @@ require("./db/mongoose");
 const userRouter = require("./routers/user");
 const taskRouter = require("./routers/task");
 const jwt = require("jsonwebtoken");
+const { PORT } = require("../config/endpoints");
 
 const app = express();
-const port = process.env.PORT;
+const port = PORT;
 
 const multer = require("multer");
 

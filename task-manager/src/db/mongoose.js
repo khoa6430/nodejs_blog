@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const validator = require("validator");
-mongoose.connect(process.env.MONGODB_URL);
+const { MONGODB_URL } = require("../../config/endpoints");
+mongoose.connect(MONGODB_URL);
 
 // const User = mongoose.model("User", {
 //   name: {
