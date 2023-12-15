@@ -40,11 +40,10 @@ const upload = multer({
   },
 });
 
-app.post(
-  "/upload",
-  upload.single("upload"),
+app.get(
+  "/test",
   (req, res) => {
-    res.send();
+    res.send({ test: PORT });
   },
   (error, req, res, next) => {
     res.status(400).send({ error: error.message });
@@ -53,8 +52,8 @@ app.post(
 
 app.use(express.json());
 
-app.use(userRouter);
-app.use(taskRouter);
+// app.use(userRouter);
+// app.use(taskRouter);
 
 app.listen(port, () => {
   console.log("Server is up on port " + port);
