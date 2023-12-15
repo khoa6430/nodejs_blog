@@ -20,7 +20,7 @@ const sendCancelationEmail = (email, name) => {
     text: `Goodbye, ${name}. I hope to see you back sometime soon.`,
   });
 };
-sendWelcomeEmail("premierleague6633@gmail.com", "khoa le");
+
 module.exports = {
   sendWelcomeEmail,
   sendCancelationEmail,
