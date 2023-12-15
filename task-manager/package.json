@@ -6,7 +6,7 @@
   "scripts": {
     "start": "nodemon src/index.js",
     "dev": "env-cmd -f .env.development.local nodemon src/index.js",
-    "product": "env-cmd -f ./etc/secrets/env_product.env nodemon src/index.js"
+    "product": "nodemon src/index.js"
   },
   "keywords": [],
   "author": "",
